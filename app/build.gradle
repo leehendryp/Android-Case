@@ -16,7 +16,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        viewBinding.enabled = true
+        dataBinding {
+            enabled true
+        }
+
+        viewBinding {
+            enabled true
+        }
     }
 
     buildTypes {
@@ -52,7 +58,11 @@ dependencies {
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
 
     // Google Play Services
-    implementation "com.google.android.gms:play-services-location:$rootProject.playLocationVersion"
+    implementation "com.google.android.gms:play-services-location:$rootProject.playServicesVersion"
+    implementation "com.google.android.gms:play-services-maps:$rootProject.playServicesVersion"
+
+    // Google Libs
+    implementation "com.google.android.libraries.places:places:$rootProject.placesVersion"
 
     // Jetpack Components
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
