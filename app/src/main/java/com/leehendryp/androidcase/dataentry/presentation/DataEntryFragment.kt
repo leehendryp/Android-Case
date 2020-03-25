@@ -1,4 +1,4 @@
-package com.leehendryp.androidcase.dataentry
+package com.leehendryp.androidcase.dataentry.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,7 +21,8 @@ class DataEntryFragment : Fragment() {
     private val viewModel: DataEntryViewModel by viewModels { viewModelFactory }
 
     companion object {
-        fun newInstance() = DataEntryFragment()
+        fun newInstance() =
+            DataEntryFragment()
     }
 
     override fun onCreateView(

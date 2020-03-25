@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/two_measures"
-            tools:context=".dataentry.DataEntryFragment">
+            tools:context=".dataentry.presentation.DataEntryFragment">
 
             <TextView
                 android:id="@+id/text_data_entry_addresses"
