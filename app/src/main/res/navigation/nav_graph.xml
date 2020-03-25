@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/data_entry_fragment"
-        android:name="com.leehendryp.androidcase.dataentry.DataEntryFragment"
+        android:name="com.leehendryp.androidcase.dataentry.presentation.DataEntryFragment"
         android:label="data_entry_fragment"
         tools:layout="@layout/data_entry_fragment">
         <action

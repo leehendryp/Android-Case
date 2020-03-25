@@ -1,4 +1,4 @@
-package com.leehendryp.androidcase.dataentry
+package com.leehendryp.androidcase.dataentry.presentation
 
 import androidx.lifecycle.ViewModel
 

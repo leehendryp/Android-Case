@@ -2,7 +2,7 @@ package com.leehendryp.androidcase.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.leehendryp.androidcase.dataentry.DataEntryViewModel
+import com.leehendryp.androidcase.dataentry.presentation.DataEntryViewModel
 import com.leehendryp.androidcase.map.RouteViewModel
 import dagger.Binds
 import dagger.Module

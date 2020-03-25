@@ -1,7 +1,7 @@
 package com.leehendryp.androidcase.core
 
-import com.leehendryp.androidcase.request.InfoProvidedByDriver
-import com.leehendryp.androidcase.response.Route
+import com.leehendryp.androidcase.dataentry.data.request.InfoProvidedByDriver
+import com.leehendryp.androidcase.dataentry.data.response.Route
 import retrofit2.http.POST
 
 interface GeoApi {
