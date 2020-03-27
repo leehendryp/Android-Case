@@ -22,7 +22,7 @@ class RouteFragment : Fragment() {
         fun newInstance() = RouteFragment()
     }
 
-    private val viewModel: RouteViewModel by viewModels { viewModelFactory }
+    private val viewModel: RouteDetailsViewModel by viewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
