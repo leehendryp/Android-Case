@@ -1,7 +1,7 @@
 package com.leehendryp.androidcase.dataentry.domain
 
 import com.google.gson.annotations.SerializedName
-import com.leehendryp.androidcase.dataentry.data.response.Point
+import com.leehendryp.androidcase.dataentry.data.entities.response.Point
 
 data class RouteWithAnttPrices(
     @SerializedName("distance") val distance: Int,
@@ -10,11 +10,16 @@ data class RouteWithAnttPrices(
     @SerializedName("duration_unit") val durationUnit: String,
     @SerializedName("points") val points: List<Point>,
     @SerializedName("provider") val provider: String,
-    @SerializedName("route") val route: List<List<Point>>,
+    @SerializedName("route") val route: List<List<List<Double>>>,
     @SerializedName("toll_cost") val tollCost: Int,
     @SerializedName("toll_cost_unit") val tollCostUnit: String,
     @SerializedName("toll_count") val tollCount: Int,
     @SerializedName("total_cost") val totalCost: Double,
+    @SerializedName("cached") val cached: Boolean? = false,
+    @SerializedName("fuel_cost") val fuelCost: Double?,
+    @SerializedName("fuel_cost_unit") val fuelCostUnit: String?,
+    @SerializedName("fuel_usage") val fuelUsage: Double?,
+    @SerializedName("fuel_usage_unit") val fuelUsageUnit: String?,
     @SerializedName("frigorificada") val frigorificada: Double,
     @SerializedName("geral") val geral: Double,
     @SerializedName("granel") val granel: Double,
