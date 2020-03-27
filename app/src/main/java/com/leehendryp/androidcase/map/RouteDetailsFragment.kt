@@ -9,17 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.leehendryp.androidcase.R
-import com.leehendryp.androidcase.databinding.RouteFragmentBinding
+import com.leehendryp.androidcase.databinding.RouteDetailsFragmentBinding
 import javax.inject.Inject
 
-class RouteFragment : Fragment() {
+class RouteDetailsFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var binding: RouteFragmentBinding
+    private lateinit var binding: RouteDetailsFragmentBinding
 
     companion object {
-        fun newInstance() = RouteFragment()
+        fun newInstance() = RouteDetailsFragment()
     }
 
     private val viewModel: RouteDetailsViewModel by viewModels { viewModelFactory }
@@ -30,7 +30,7 @@ class RouteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.route_fragment, container, false
+            inflater, R.layout.route_details_fragment, container, false
         )
         return binding.root
     }
