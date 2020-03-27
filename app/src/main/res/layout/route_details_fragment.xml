@@ -5,7 +5,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".map.RouteFragment">
+        tools:context=".map.RouteDetailsFragment">
 
         <TextView
             android:id="@+id/text_map_view"

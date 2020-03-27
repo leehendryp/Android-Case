@@ -1,0 +1,65 @@
+{
+  "points": [
+    {
+      "point": [
+        -46.68664,
+        -23.59496
+      ],
+      "provider": "Provided"
+    },
+    {
+      "point": [
+        -46.67678,
+        -23.59867
+      ],
+      "provider": "Provided"
+    }
+  ],
+  "distance": 1962,
+  "distance_unit": "meters",
+  "duration": 583,
+  "duration_unit": "seconds",
+  "has_tolls": false,
+  "toll_count": 0,
+  "toll_cost": 0,
+  "toll_cost_unit": "R$",
+  "route": [
+    [
+      [
+        -46.68662,
+        -23.59504
+      ],
+      [
+        -46.6881,
+        -23.59571
+      ],
+      [
+        -46.68701,
+        -23.59613
+      ],
+      [
+        -46.68546,
+        -23.59575
+      ],
+      [
+        -46.67528,
+        -23.60051
+      ],
+      [
+        -46.67486,
+        -23.59966
+      ],
+      [
+        -46.6768,
+        -23.59871
+      ]
+    ]
+  ],
+  "provider": "Maplink",
+  "cached": true,
+  "fuel_usage": 0.39,
+  "fuel_usage_unit": "liters",
+  "fuel_cost": 1.73,
+  "fuel_cost_unit": "R$",
+  "total_cost": 1.73
+}

@@ -1,7 +1,8 @@
 package com.leehendryp.androidcase.core
 
-import com.leehendryp.androidcase.dataentry.data.request.InfoProvidedByDriver
-import com.leehendryp.androidcase.dataentry.data.response.Route
+import com.leehendryp.androidcase.dataentry.data.entities.request.InfoProvidedByDriver
+import com.leehendryp.androidcase.dataentry.data.entities.response.RouteDetails
+import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface GeoApi {
@@ -10,5 +11,5 @@ interface GeoApi {
     }
 
     @POST(ENDPOINT)
-    suspend fun send(info: InfoProvidedByDriver): Route
+    suspend fun send(@Body info: InfoProvidedByDriver): RouteDetails
 }
