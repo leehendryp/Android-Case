@@ -1,4 +1,4 @@
-package com.leehendryp.androidcase.dataentry.data.response
+package com.leehendryp.androidcase.dataentry.data.entities.response
 
 import com.google.gson.annotations.SerializedName
 
