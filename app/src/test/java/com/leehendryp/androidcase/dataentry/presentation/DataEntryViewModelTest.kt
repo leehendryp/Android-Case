@@ -58,24 +58,22 @@ class DataEntryViewModelTest {
     }
 
     @Test
-    fun `should update state to Success with route details and ANTT prices data upon successfully exchanging data via repo based on info provided by driver`() =
+    fun `should update state to Success and save route details and ANTT prices data upon successfully exchanging data via repo based on info provided by driver`() =
         runBlocking {
             coEvery { repo.getRouteDetailsFrom(any()) } returns DTOs.routeWithAnttPrices
 
             viewModel.getRouteDetailsFrom(DTOs.infoProvidedByDriver)
 
-            verify(exactly = 3) { mockedObserver.onChanged(capture(stateSlots)) }
+            verify(exactly = 4) { mockedObserver.onChanged(capture(stateSlots)) }
 
             verifyOrder {
                 mockedObserver.onChanged(Default)
                 mockedObserver.onChanged(Loading)
-                mockedObserver.onChanged(any<Success>())
+                mockedObserver.onChanged(Success)
+                mockedObserver.onChanged(Default)
             }
 
-            assertThat(
-                (stateSlots[2] as Success).data,
-                equalTo(DTOs.routeWithAnttPrices)
-            )
+            assertThat(viewModel.data.value, equalTo(DTOs.routeWithAnttPrices))
         }
 
     @Test
@@ -87,12 +85,13 @@ class DataEntryViewModelTest {
 
             viewModel.getRouteDetailsFrom(DTOs.infoProvidedByDriver)
 
-            verify(exactly = 3) { mockedObserver.onChanged(capture(stateSlots)) }
+            verify(exactly = 4) { mockedObserver.onChanged(capture(stateSlots)) }
 
             verifyOrder {
                 mockedObserver.onChanged(Default)
                 mockedObserver.onChanged(Loading)
                 mockedObserver.onChanged(any<Error>())
+                mockedObserver.onChanged(Default)
             }
 
             assertThat((stateSlots[2] as Error).error, equalTo(error))

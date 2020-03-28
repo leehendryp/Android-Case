@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.leehendryp.androidcase.dataentry.data.entities.request.InfoProvidedByDriver
 import com.leehendryp.androidcase.dataentry.domain.Repository
+import com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,9 +19,12 @@ class DataEntryViewModel @Inject constructor(private val repository: Repository)
     private val _state by lazy { MutableLiveData<DataEntryState>().apply { toDefault() } }
     val state: LiveData<DataEntryState> = _state
 
+    private val _data by lazy { MutableLiveData<RouteWithAnttPrices>() }
+    val data: LiveData<RouteWithAnttPrices> = _data
+
     fun getRouteDetailsFrom(info: InfoProvidedByDriver): Job = launchDataLoad {
-        val data = repository.getRouteDetailsFrom(info)
-        _state.toSuccess(data)
+        _data.postValue(repository.getRouteDetailsFrom(info))
+        _state.toSuccess()
     }
 
     private fun <T> launchDataLoad(block: suspend () -> T): Job {
@@ -30,6 +34,8 @@ class DataEntryViewModel @Inject constructor(private val repository: Repository)
                 block()
             } catch (error: Throwable) {
                 _state.toError(error)
+            } finally {
+                _state.toDefault()
             }
         }
     }
