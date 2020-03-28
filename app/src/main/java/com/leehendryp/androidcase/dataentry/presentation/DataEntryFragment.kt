@@ -24,7 +24,6 @@ import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Success
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryViewModel.Companion.MIN_SHAFTS
 import javax.inject.Inject
 
-
 class DataEntryFragment : Fragment() {
     private lateinit var binding: DataEntryFragmentBinding
 
