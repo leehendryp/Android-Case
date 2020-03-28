@@ -13,17 +13,18 @@ class RepositoryImpl(
     private val remoteSource: RemoteDataSource,
     private val localSource: LocalDataSource
 ) : Repository {
-    override suspend fun getRouteDetailsFrom(info: InfoProvidedByDriver): RouteWithAnttPrices = coTryCatch {
-        val routeDetails = remoteSource.getRouteDetailsFrom(info)
-        val anttPrices = remoteSource.getAnttPrices(
-            InfoForAntt(
-                axis = info.shafts,
-                distance = routeDetails.distance?.toDouble() ?: 0.0,
-                hasReturnShipment = true
+    override suspend fun getRouteDetailsFrom(info: InfoProvidedByDriver): RouteWithAnttPrices =
+        coTryCatch {
+            val routeDetails = remoteSource.getRouteDetailsFrom(info)
+            val anttPrices = remoteSource.getAnttPrices(
+                InfoForAntt(
+                    axis = info.shafts,
+                    distance = routeDetails.distance?.toDouble() ?: 0.0,
+                    hasReturnShipment = true
+                )
             )
-        )
-        createRouteWithAnttPrices(routeDetails, anttPrices)
-    }
+            createRouteWithAnttPrices(routeDetails, anttPrices).also { save(it) }
+        }
 
     override suspend fun save(routeWithAnttPrices: RouteWithAnttPrices) = coTryCatch {
         localSource.save(routeWithAnttPrices)

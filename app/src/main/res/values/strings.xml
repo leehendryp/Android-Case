@@ -2,4 +2,5 @@
     <string name="app_name">Android Case</string>
     <string name="data_entry_spinner_prompt">Load Type</string>
     <string name="location_text">"Latitude: %1$.4f \n Longitude: %2$.4f\n Timestamp: %3$tr"</string>
+    <string name="error_message">An error occurred. Please, try again.</string>
 </resources>
