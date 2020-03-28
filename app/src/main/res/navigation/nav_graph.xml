@@ -11,16 +11,21 @@
         tools:layout="@layout/data_entry_fragment">
         <action
             android:id="@+id/go_to_route_view"
-            app:destination="@id/route_fragment"
+            app:destination="@id/route_details_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
-
     <fragment
-        android:id="@+id/route_fragment"
+        android:id="@+id/route_details_fragment"
         android:name="com.leehendryp.androidcase.map.RouteDetailsFragment"
-        android:label="route_fragment"
-        tools:layout="@layout/route_details_fragment" />
+        android:label="route_details_fragment"
+        tools:layout="@layout/route_details_fragment">
+        <argument
+            android:name="routeWithAnttPrices"
+            android:defaultValue="@null"
+            app:argType="com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices"
+            app:nullable="true" />
+    </fragment>
 </navigation>
