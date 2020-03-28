@@ -53,8 +53,8 @@ object DTOs {
     )
 
     val infoForAntt = InfoForAntt(
-        axis = 2,
-        distance = 2976.087,
+        axis = 3,
+        distance = 1962.toDouble(),
         hasReturnShipment = true
     )
 
