@@ -1,14 +1,18 @@
 package com.leehendryp.androidcase.dataentry.domain
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.leehendryp.androidcase.dataentry.data.entities.response.Point
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
+@Parcelize
 data class RouteWithAnttPrices(
     @SerializedName("distance") val distance: Int,
     @SerializedName("distance_unit") val distanceUnit: String,
     @SerializedName("duration") val duration: Int,
     @SerializedName("duration_unit") val durationUnit: String,
-    @SerializedName("points") val points: List<Point>,
+    @SerializedName("points") val points: @RawValue List<Point>,
     @SerializedName("provider") val provider: String,
     @SerializedName("route") val route: List<List<List<Double>>>,
     @SerializedName("toll_cost") val tollCost: Int,
@@ -25,4 +29,4 @@ data class RouteWithAnttPrices(
     @SerializedName("granel") val granel: Double,
     @SerializedName("neogranel") val neogranel: Double,
     @SerializedName("perigosa") val perigosa: Double
-)
+) : Parcelable
