@@ -17,7 +17,6 @@ import com.leehendryp.androidcase.core.Extensions.mat
 import com.leehendryp.androidcase.core.Extensions.transparent
 import com.leehendryp.androidcase.core.Extensions.vanish
 import com.leehendryp.androidcase.databinding.DataEntryFragmentBinding
-import com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Error
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Loading
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Success
@@ -45,33 +44,33 @@ class DataEntryFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        observeViewModel()
+        observeViewModelState()
         binding.apply {
             setNavigationListener()
             setSeekBarMinValue()
         }
     }
 
-    private fun observeViewModel() {
+    private fun observeViewModelState() {
         // viewModel.state.observe(viewLifecycleOwner, Observer(::updateUI))
     }
 
     private fun updateUI(state: DataEntryState) {
         toggleLoading()
         when (state) {
-            is Success -> toggleCalcRouteButton(state)
+            is Success -> toggleCalcRouteButton(true)
             is Error -> showErrorMessage()
         }
     }
 
-    private fun toggleCalcRouteButton(state: DataEntryState) {
+    private fun toggleCalcRouteButton(enable: Boolean) {
         binding.buttonCalculateRoute.apply {
-            if (state !is Success) {
-                isEnabled = false
-                transparent()
-            } else {
+            if (enable) {
                 isEnabled = true
                 mat()
+            } else {
+                isEnabled = false
+                transparent()
             }
         }
     }
@@ -92,41 +91,49 @@ class DataEntryFragment : Fragment() {
     }
 
     private fun goToRouteDetailsView() {
-        val data: RouteWithAnttPrices? = (viewModel.state.value as Success).data
-        val action = DataEntryFragmentDirections.goToRouteView(data)
-        findNavController().navigate(action)
+        val data = viewModel.data.value
+
+        data?.let { routeWithAnttPrices ->
+            val action = DataEntryFragmentDirections.goToRouteView(routeWithAnttPrices)
+            findNavController().navigate(action)
+        }
     }
 
     private fun DataEntryFragmentBinding.setSeekBarMinValue() {
         setProgressToMinValue()
 
         seekBarDataEntryTruckShaft.apply {
-            setOnSeekBarChangeListener(
-                object : SeekBar.OnSeekBarChangeListener {
-                    override fun onProgressChanged(
-                        seekBar: SeekBar?,
-                        progress: Int,
-                        fromUser: Boolean
-                    ) {
-                        if (progress < MIN_SHAFTS) setProgressToMinValue()
-                        updateShaftDisplay()
-                    }
-
-                    override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
-
-                    override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
-                }
-            )
+            doOnProgressChanged { setProgressToMinValue().also { updateShaftDisplay() } }
         }
     }
 
     private fun setProgressToMinValue() {
-        binding.seekBarDataEntryTruckShaft.progress = MIN_SHAFTS
+        binding.seekBarDataEntryTruckShaft.apply {
+            if (progress < MIN_SHAFTS) progress = MIN_SHAFTS
+        }
     }
 
     private fun updateShaftDisplay() {
         binding.apply {
             textDataEntryShaftNumberDisplay.text = seekBarDataEntryTruckShaft.progress.toString()
         }
+    }
+
+    private fun SeekBar.doOnProgressChanged(block: () -> Unit) {
+        setOnSeekBarChangeListener(
+            object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    block()
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+            }
+        )
     }
 }
