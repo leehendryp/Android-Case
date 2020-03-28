@@ -17,7 +17,6 @@ import com.leehendryp.androidcase.core.Extensions.mat
 import com.leehendryp.androidcase.core.Extensions.transparent
 import com.leehendryp.androidcase.core.Extensions.vanish
 import com.leehendryp.androidcase.databinding.DataEntryFragmentBinding
-import com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Error
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Loading
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Success
@@ -45,33 +44,33 @@ class DataEntryFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        observeViewModel()
+        observeViewModelState()
         binding.apply {
             setNavigationListener()
             setSeekBarMinValue()
         }
     }
 
-    private fun observeViewModel() {
+    private fun observeViewModelState() {
         // viewModel.state.observe(viewLifecycleOwner, Observer(::updateUI))
     }
 
     private fun updateUI(state: DataEntryState) {
         toggleLoading()
         when (state) {
-            is Success -> toggleCalcRouteButton(state)
+            is Success -> toggleCalcRouteButton(true)
             is Error -> showErrorMessage()
         }
     }
 
-    private fun toggleCalcRouteButton(state: DataEntryState) {
+    private fun toggleCalcRouteButton(enable: Boolean) {
         binding.buttonCalculateRoute.apply {
-            if (state !is Success) {
-                isEnabled = false
-                transparent()
-            } else {
+            if (enable) {
                 isEnabled = true
                 mat()
+            } else {
+                isEnabled = false
+                transparent()
             }
         }
     }
@@ -92,9 +91,12 @@ class DataEntryFragment : Fragment() {
     }
 
     private fun goToRouteDetailsView() {
-        val data: RouteWithAnttPrices? = (viewModel.state.value as Success).data
-        val action = DataEntryFragmentDirections.goToRouteView(data)
-        findNavController().navigate(action)
+        val data = viewModel.data.value
+
+        data?.let { routeWithAnttPrices ->
+            val action = DataEntryFragmentDirections.goToRouteView(routeWithAnttPrices)
+            findNavController().navigate(action)
+        }
     }
 
     private fun DataEntryFragmentBinding.setSeekBarMinValue() {
