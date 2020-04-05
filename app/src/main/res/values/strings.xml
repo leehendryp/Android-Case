@@ -3,4 +3,15 @@
     <string name="data_entry_spinner_prompt">Load Type</string>
     <string name="location_text">"Latitude: %1$.4f \n Longitude: %2$.4f\n Timestamp: %3$tr"</string>
     <string name="error_message">An error occurred. Please, try again.</string>
+    <string name="data_entry_title">Route information</string>
+    <string name="data_entry_starting_point">Starting point</string>
+    <string name="data_entry_destination">Destination</string>
+    <string name="data_entry_hint_average_consumption">km/L</string>
+    <string name="data_entry_hint_fuel_price">Diesel price</string>
+    <string name="data_entry_button">Calculate route</string>
+    <string name="data_entry_number_of_shafts">Number of truck shafts</string>
+    <string name="data_entry_costs">Fuel consumption and price</string>
+    <string name="data_entry_avg_fuel_consumption">Average fuel consumption (km/L)</string>
+    <string name="data_entry_fuel_price">Diesel price</string>
+    <string name="data_entry_default_number_of_shafts_value">2</string>
 </resources>
