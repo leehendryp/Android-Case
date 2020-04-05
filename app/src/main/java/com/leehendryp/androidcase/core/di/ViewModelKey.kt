@@ -1,4 +1,4 @@
-package com.leehendryp.androidcase.core
+package com.leehendryp.androidcase.core.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey
