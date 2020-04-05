@@ -60,7 +60,7 @@ class DataEntryViewModelTest {
     @Test
     fun `should update state to Success and save route details and ANTT prices data upon successfully exchanging data via repo based on info provided by driver`() =
         runBlocking {
-            coEvery { repo.getRouteDetailsFrom(any()) } returns DTOs.routeWithAnttPrices
+            coEvery { repo.getRouteWithAnttPricesFrom(any()) } returns DTOs.routeWithAnttPrices
 
             viewModel.getRouteDetailsFrom(DTOs.infoProvidedByDriver)
 
@@ -69,11 +69,11 @@ class DataEntryViewModelTest {
             verifyOrder {
                 mockedObserver.onChanged(Default)
                 mockedObserver.onChanged(Loading)
-                mockedObserver.onChanged(Success)
+                mockedObserver.onChanged(any<Success>())
                 mockedObserver.onChanged(Default)
             }
 
-            assertThat(viewModel.data.value, equalTo(DTOs.routeWithAnttPrices))
+            assertThat((stateSlots[2] as Success).data, equalTo(DTOs.routeWithAnttPrices))
         }
 
     @Test
@@ -81,7 +81,7 @@ class DataEntryViewModelTest {
         runBlocking {
             val error = Throwable()
 
-            coEvery { repo.getRouteDetailsFrom(any()) } throws error
+            coEvery { repo.getRouteWithAnttPricesFrom(any()) } throws error
 
             viewModel.getRouteDetailsFrom(DTOs.infoProvidedByDriver)
 
