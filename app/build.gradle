@@ -27,6 +27,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            it.buildConfigField "String", "GOOGLE_CLOUD_KEY", keys.googleCloudKey
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -60,6 +64,7 @@ dependencies {
     // Google Play Services
     implementation "com.google.android.gms:play-services-location:$rootProject.playServicesVersion"
     implementation "com.google.android.gms:play-services-maps:$rootProject.playServicesVersion"
+    implementation "com.google.android.gms:play-services-places:$rootProject.playServicesVersion"
 
     // Google Libs
     implementation "com.google.android.libraries.places:places:$rootProject.placesVersion"
@@ -70,6 +75,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"

@@ -2,7 +2,7 @@ package com.leehendryp.androidcase.dataentry.data
 
 import com.leehendryp.androidcase.dataentry.data.entities.request.InfoForAntt
 import com.leehendryp.androidcase.dataentry.data.entities.request.InfoProvidedByDriver
-import com.leehendryp.androidcase.dataentry.data.entities.request.Place
+import com.leehendryp.androidcase.dataentry.data.entities.request.Spots
 import com.leehendryp.androidcase.dataentry.data.entities.response.AnttPrices
 import com.leehendryp.androidcase.dataentry.data.entities.response.Point
 import com.leehendryp.androidcase.dataentry.data.entities.response.RouteDetails
@@ -12,17 +12,17 @@ object DTOs {
     val infoProvidedByDriver = InfoProvidedByDriver(
         fuelConsumption = 5,
         fuelPrice = 4.4,
-        places = listOf(
-            Place(listOf(-46.68664, -23.59496)),
-            Place(listOf(-46.67678, -23.59867))
+        spots = listOf(
+            Spots(arrayListOf(-46.68664, -23.59496)),
+            Spots(arrayListOf(-46.67678, -23.59867))
         ),
         shafts = 3
     )
 
     val routeDetails = RouteDetails(
         points = listOf(
-            Point(listOf(-46.68664, -23.59496), "Provided"),
-            Point(listOf(-46.67678, -23.59867), "Provided")
+            Point(arrayListOf(-46.68664, -23.59496), "Provided"),
+            Point(arrayListOf(-46.67678, -23.59867), "Provided")
         ),
         distance = 1962,
         distanceUnit = "meters",
@@ -34,13 +34,13 @@ object DTOs {
         tollCostUnit = "R$",
         route = listOf(
             listOf(
-                listOf(-46.68662, -23.59504),
-                listOf(-46.6881, -23.59571),
-                listOf(-46.68701, -23.59613),
-                listOf(-46.68546, -23.59575),
-                listOf(-46.67528, -23.60051),
-                listOf(-46.67486, -23.59966),
-                listOf(-46.6768, -23.59871)
+                arrayListOf(-46.68662, -23.59504),
+                arrayListOf(-46.6881, -23.59571),
+                arrayListOf(-46.68701, -23.59613),
+                arrayListOf(-46.68546, -23.59575),
+                arrayListOf(-46.67528, -23.60051),
+                arrayListOf(-46.67486, -23.59966),
+                arrayListOf(-46.6768, -23.59871)
             )
         ),
         provider = "Maplink",
@@ -53,7 +53,7 @@ object DTOs {
     )
 
     val infoForAntt = InfoForAntt(
-        axis = 3,
+        shafts = 3,
         distance = 1962.toDouble(),
         hasReturnShipment = true
     )
@@ -68,8 +68,8 @@ object DTOs {
 
     val routeWithAnttPrices = RouteWithAnttPrices(
         points = listOf(
-            Point(listOf(-46.68664, -23.59496), "Provided"),
-            Point(listOf(-46.67678, -23.59867), "Provided")
+            Point(arrayListOf(-46.68664, -23.59496), "Provided"),
+            Point(arrayListOf(-46.67678, -23.59867), "Provided")
         ),
         distance = 1962,
         distanceUnit = "meters",

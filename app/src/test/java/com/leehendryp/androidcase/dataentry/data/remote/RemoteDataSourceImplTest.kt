@@ -1,8 +1,8 @@
 package com.leehendryp.androidcase.dataentry.data.remote
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.leehendryp.androidcase.core.GeoApi
-import com.leehendryp.androidcase.core.TicTacApi
+import com.leehendryp.androidcase.core.apis.GeoApi
+import com.leehendryp.androidcase.core.apis.TicTacApi
 import com.leehendryp.androidcase.dataentry.core.MainCoroutineRule
 import com.leehendryp.androidcase.dataentry.core.ResponseType.CLIENT_ERROR
 import com.leehendryp.androidcase.dataentry.core.ResponseType.SERVER_ERROR

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="no_measure">0dp</dimen>
+    <dimen name="half_measure">4dp</dimen>
     <dimen name="one_measure">8dp</dimen>
     <dimen name="two_measures">16dp</dimen>
     <dimen name="three_measures">24dp</dimen>

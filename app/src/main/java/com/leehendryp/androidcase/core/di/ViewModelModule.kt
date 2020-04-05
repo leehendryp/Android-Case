@@ -1,14 +1,12 @@
-package com.leehendryp.androidcase.core
+package com.leehendryp.androidcase.core.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryViewModel
-import com.leehendryp.androidcase.map.RouteDetailsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
-@Suppress("unused")
 @Module
 abstract class ViewModelModule {
     @Binds
@@ -19,8 +17,8 @@ abstract class ViewModelModule {
     @ViewModelKey(DataEntryViewModel::class)
     abstract fun bindDataEntryViewModel(viewModel: DataEntryViewModel): ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(RouteDetailsViewModel::class)
-    abstract fun bindRouteDetailsViewModel(viewModel: RouteDetailsViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(RouteDetailsViewModel::class)
+//    abstract fun bindRouteDetailsViewModel(viewModel: RouteDetailsViewModel): ViewModel
 }
