@@ -15,7 +15,7 @@ data class RouteDetails(
     @SerializedName("has_tolls") val hasTolls: Boolean?,
     @SerializedName("points") val points: List<Point>?,
     @SerializedName("provider") val provider: String?,
-    @SerializedName("route") val route: List<List<List<Double>>>?,
+    @SerializedName("route") val route: List<List<ArrayList<Double>>>?,
     @SerializedName("toll_cost") val tollCost: Int?,
     @SerializedName("toll_cost_unit") val tollCostUnit: String?,
     @SerializedName("toll_count") val tollCount: Int?,
