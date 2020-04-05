@@ -7,23 +7,24 @@ import com.leehendryp.androidcase.dataentry.data.local.LocalDataSource
 import com.leehendryp.androidcase.dataentry.data.remote.RemoteDataSource
 import com.leehendryp.androidcase.dataentry.domain.Repository
 import com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices
-import com.leehendryp.androidcase.dataentry.domain.createRouteWithAnttPrices
+import com.leehendryp.androidcase.dataentry.domain.mapIntoRouteWithAnttPrices
+import javax.inject.Inject
 
-class RepositoryImpl(
+class RepositoryImpl @Inject constructor(
     private val remoteSource: RemoteDataSource,
     private val localSource: LocalDataSource
 ) : Repository {
-    override suspend fun getRouteDetailsFrom(info: InfoProvidedByDriver): RouteWithAnttPrices =
+    override suspend fun getRouteWithAnttPricesFrom(info: InfoProvidedByDriver): RouteWithAnttPrices =
         coTryCatch {
             val routeDetails = remoteSource.getRouteDetailsFrom(info)
             val anttPrices = remoteSource.getAnttPrices(
                 InfoForAntt(
-                    axis = info.shafts,
+                    shafts = info.shafts,
                     distance = routeDetails.distance?.toDouble() ?: 0.0,
                     hasReturnShipment = true
                 )
             )
-            createRouteWithAnttPrices(routeDetails, anttPrices).also { save(it) }
+            routeDetails.mapIntoRouteWithAnttPrices(anttPrices).also { save(it) }
         }
 
     override suspend fun save(routeWithAnttPrices: RouteWithAnttPrices) = coTryCatch {
