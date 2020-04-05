@@ -1,7 +1,7 @@
 package com.leehendryp.androidcase.dataentry.data.remote
 
-import com.leehendryp.androidcase.core.GeoApi
-import com.leehendryp.androidcase.core.TicTacApi
+import com.leehendryp.androidcase.core.apis.GeoApi
+import com.leehendryp.androidcase.core.apis.TicTacApi
 import com.leehendryp.androidcase.core.utils.coTryCatch
 import com.leehendryp.androidcase.dataentry.data.CouldNotFetchAnttPrices
 import com.leehendryp.androidcase.dataentry.data.CouldNotFetchRouteDetails
@@ -9,8 +9,9 @@ import com.leehendryp.androidcase.dataentry.data.entities.request.InfoForAntt
 import com.leehendryp.androidcase.dataentry.data.entities.request.InfoProvidedByDriver
 import com.leehendryp.androidcase.dataentry.data.entities.response.AnttPrices
 import com.leehendryp.androidcase.dataentry.data.entities.response.RouteDetails
+import javax.inject.Inject
 
-class RemoteDataSourceImpl(
+class RemoteDataSourceImpl @Inject constructor(
     private val geoApi: GeoApi,
     private val ticTacApi: TicTacApi
 ) : RemoteDataSource {
@@ -25,7 +26,7 @@ class RemoteDataSourceImpl(
     )
 
     override suspend fun getAnttPrices(infoForAntt: InfoForAntt): AnttPrices = coTryCatch(
-        { ticTacApi.getAnttPrices(infoForAntt) },
+        { ticTacApi.send(infoForAntt) },
         { CouldNotFetchAnttPrices(REMOTE_SOURCE_ERROR, it) }
     )
 }
