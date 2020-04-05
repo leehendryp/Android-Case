@@ -1,4 +1,4 @@
-package com.leehendryp.androidcase.core
+package com.leehendryp.androidcase.core.apis
 
 import com.leehendryp.androidcase.dataentry.data.entities.request.InfoProvidedByDriver
 import com.leehendryp.androidcase.dataentry.data.entities.response.RouteDetails
@@ -7,7 +7,8 @@ import retrofit2.http.POST
 
 interface GeoApi {
     companion object {
-        private const val ENDPOINT = "route/"
+        const val GEO_API_BASE_URL = "https://geo.api.truckpad.io/v1/"
+        private const val ENDPOINT = "route"
     }
 
     @POST(ENDPOINT)
