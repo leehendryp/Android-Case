@@ -2,7 +2,6 @@ package com.leehendryp.androidcase.dataentry.domain
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.leehendryp.androidcase.dataentry.data.entities.response.Point
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 

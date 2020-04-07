@@ -7,7 +7,7 @@ import com.leehendryp.androidcase.dataentry.data.local.LocalDataSource
 import com.leehendryp.androidcase.dataentry.data.remote.RemoteDataSource
 import com.leehendryp.androidcase.dataentry.domain.Repository
 import com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices
-import com.leehendryp.androidcase.dataentry.domain.mapIntoRouteWithAnttPrices
+import com.leehendryp.androidcase.dataentry.domain.toRouteWithAnttPrices
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
@@ -24,7 +24,7 @@ class RepositoryImpl @Inject constructor(
                     hasReturnShipment = true
                 )
             )
-            routeDetails.mapIntoRouteWithAnttPrices(anttPrices).also { save(it) }
+            routeDetails.toRouteWithAnttPrices(anttPrices).also { save(it) }
         }
 
     override suspend fun save(routeWithAnttPrices: RouteWithAnttPrices) = coTryCatch {

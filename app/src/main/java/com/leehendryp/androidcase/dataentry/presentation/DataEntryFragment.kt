@@ -27,7 +27,7 @@ import com.leehendryp.androidcase.dataentry.data.entities.request.InfoProvidedBy
 import com.leehendryp.androidcase.dataentry.data.entities.request.Spots
 import com.leehendryp.androidcase.dataentry.domain.Address
 import com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices
-import com.leehendryp.androidcase.dataentry.domain.mapIntoAddress
+import com.leehendryp.androidcase.dataentry.domain.toAddress
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Error
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Loading
 import com.leehendryp.androidcase.dataentry.presentation.DataEntryState.Success
@@ -186,8 +186,8 @@ class DataEntryFragment : Fragment() {
         setOnPlaceSelectedListener(
             onPlaceSelected = { place ->
                 when (type) {
-                    AddressType.STARTING_POINT -> startingPoint = place.mapIntoAddress()
-                    AddressType.DESTINATION -> destination = place.mapIntoAddress()
+                    AddressType.STARTING_POINT -> startingPoint = place.toAddress()
+                    AddressType.DESTINATION -> destination = place.toAddress()
                 }
             },
             onError = { showErrorMessage() }

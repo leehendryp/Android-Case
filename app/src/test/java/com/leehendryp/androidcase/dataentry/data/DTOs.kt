@@ -3,9 +3,9 @@ package com.leehendryp.androidcase.dataentry.data
 import com.leehendryp.androidcase.dataentry.data.entities.request.InfoForAntt
 import com.leehendryp.androidcase.dataentry.data.entities.request.InfoProvidedByDriver
 import com.leehendryp.androidcase.dataentry.data.entities.request.Spots
-import com.leehendryp.androidcase.dataentry.data.entities.response.AnttPrices
-import com.leehendryp.androidcase.dataentry.data.entities.response.Point
-import com.leehendryp.androidcase.dataentry.data.entities.response.RouteDetails
+import com.leehendryp.androidcase.dataentry.data.entities.response.AnttPricesResponse
+import com.leehendryp.androidcase.dataentry.data.entities.response.PointResponse
+import com.leehendryp.androidcase.dataentry.data.entities.response.RouteDetailsResponse
 import com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices
 
 object DTOs {
@@ -19,10 +19,10 @@ object DTOs {
         shafts = 3
     )
 
-    val routeDetails = RouteDetails(
+    val routeDetails = RouteDetailsResponse(
         points = listOf(
-            Point(arrayListOf(-46.68664, -23.59496), "Provided"),
-            Point(arrayListOf(-46.67678, -23.59867), "Provided")
+            PointResponse(arrayListOf(-46.68664, -23.59496), "Provided"),
+            PointResponse(arrayListOf(-46.67678, -23.59867), "Provided")
         ),
         distance = 1962,
         distanceUnit = "meters",
@@ -58,7 +58,7 @@ object DTOs {
         hasReturnShipment = true
     )
 
-    val anttPrices = AnttPrices(
+    val anttPrices = AnttPricesResponse(
         frigorificada = 3987.96,
         geral = 5654.57,
         granel = 5595.04,
@@ -68,8 +68,8 @@ object DTOs {
 
     val routeWithAnttPrices = RouteWithAnttPrices(
         points = listOf(
-            Point(arrayListOf(-46.68664, -23.59496), "Provided"),
-            Point(arrayListOf(-46.67678, -23.59867), "Provided")
+            PointResponse(arrayListOf(-46.68664, -23.59496), "Provided"),
+            PointResponse(arrayListOf(-46.67678, -23.59867), "Provided")
         ),
         distance = 1962,
         distanceUnit = "meters",
