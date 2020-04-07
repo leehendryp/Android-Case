@@ -1,7 +1,7 @@
 package com.leehendryp.androidcase.core.apis
 
 import com.leehendryp.androidcase.dataentry.data.entities.request.InfoForAntt
-import com.leehendryp.androidcase.dataentry.data.entities.response.AnttPrices
+import com.leehendryp.androidcase.dataentry.data.entities.response.AnttPricesResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -12,5 +12,5 @@ interface TicTacApi {
     }
 
     @POST(ENDPOINT)
-    suspend fun send(@Body infoForAntt: InfoForAntt): AnttPrices
+    suspend fun send(@Body infoForAntt: InfoForAntt): AnttPricesResponse
 }
