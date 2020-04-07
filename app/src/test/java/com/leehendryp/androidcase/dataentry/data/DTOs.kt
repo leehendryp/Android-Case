@@ -6,6 +6,7 @@ import com.leehendryp.androidcase.dataentry.data.entities.request.Spots
 import com.leehendryp.androidcase.dataentry.data.entities.response.AnttPricesResponse
 import com.leehendryp.androidcase.dataentry.data.entities.response.PointResponse
 import com.leehendryp.androidcase.dataentry.data.entities.response.RouteDetailsResponse
+import com.leehendryp.androidcase.dataentry.domain.Point
 import com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices
 
 object DTOs {
@@ -13,16 +14,16 @@ object DTOs {
         fuelConsumption = 5,
         fuelPrice = 4.4,
         spots = listOf(
-            Spots(arrayListOf(-46.68664, -23.59496)),
-            Spots(arrayListOf(-46.67678, -23.59867))
+            Spots(listOf(-46.68664, -23.59496)),
+            Spots(listOf(-46.67678, -23.59867))
         ),
         shafts = 3
     )
 
     val routeDetails = RouteDetailsResponse(
         points = listOf(
-            PointResponse(arrayListOf(-46.68664, -23.59496), "Provided"),
-            PointResponse(arrayListOf(-46.67678, -23.59867), "Provided")
+            PointResponse(listOf(-46.68664, -23.59496), "Provided"),
+            PointResponse(listOf(-46.67678, -23.59867), "Provided")
         ),
         distance = 1962,
         distanceUnit = "meters",
@@ -68,8 +69,8 @@ object DTOs {
 
     val routeWithAnttPrices = RouteWithAnttPrices(
         points = listOf(
-            PointResponse(arrayListOf(-46.68664, -23.59496), "Provided"),
-            PointResponse(arrayListOf(-46.67678, -23.59867), "Provided")
+            Point(listOf(-46.68664, -23.59496)),
+            Point(listOf(-46.67678, -23.59867))
         ),
         distance = 1962,
         distanceUnit = "meters",
