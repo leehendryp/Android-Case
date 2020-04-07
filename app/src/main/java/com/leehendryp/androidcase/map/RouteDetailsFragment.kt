@@ -15,12 +15,16 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_BLUE
+import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_RED
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.leehendryp.androidcase.R
 import com.leehendryp.androidcase.databinding.RouteDetailsFragmentBinding
+import com.leehendryp.androidcase.dataentry.domain.Point
 import com.leehendryp.androidcase.dataentry.domain.RouteWithAnttPrices
 import javax.inject.Inject
 
@@ -71,40 +75,64 @@ class RouteDetailsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let { this.map = it }
-        routeWithAnttPrices?.let { showRoute(it.route[0]) }
+        routeWithAnttPrices?.let { showRoute(it) }
     }
 
-    private fun showRoute(route: List<List<Double>>) {
-        val coordinates: List<List<Double>> = route
+    private fun showRoute(routeWithAnttPrices: RouteWithAnttPrices) {
+        val coordinates: List<List<Double>> = routeWithAnttPrices.route[0]
         val polylineOptions = createPolylineOption()
         val boundsBuilder = LatLngBounds.Builder()
 
-        polylineOptions.addRoutePoints(route, boundsBuilder)
+        polylineOptions.addRoutePoints(coordinates, boundsBuilder)
 
         map.apply {
             addPolyline(polylineOptions)
             moveCamera(
                 CameraUpdateFactory.newLatLngBounds(
                     boundsBuilder.build(),
-                    resources.getDimension(R.dimen.four_measures).toInt()
+                    resources.getDimension(R.dimen.six_measures).toInt()
                 )
             )
-            addMarkers(coordinates)
+            addMarkers(routeWithAnttPrices.points)
         }
     }
 
-    private fun GoogleMap.addMarkers(coordinates: List<List<Double>>) {
-        val origin = coordinates[0]
-        val destination = coordinates[1]
+    private fun GoogleMap.addMarkers(points: List<Point>) {
+        points.forEach { coordinates ->
+            val (longitude, latitude) =
+                Pair(coordinates.point[1], coordinates.point[0])
 
-        val (originLongitude,
-            originLatitude) = Pair(origin[0], origin[1])
+            addMarker(
+                MarkerOptions()
+                    .position(LatLng(longitude, latitude))
+                    .icon(
+                        BitmapDescriptorFactory.defaultMarker(
+                            defineMarkerColor(points, coordinates)
+                        )
+                    )
+                    .title(defineTitle(points, coordinates))
+            )
+        }
+    }
 
-        val (destinationLongitude,
-            destinationLatitude) = Pair(destination[0], destination[1])
+    private fun defineMarkerColor(
+        points: List<Point>,
+        coordinates: Point
+    ): Float {
+        return when (points.indexOf(coordinates)) {
+            0 -> HUE_RED
+            else -> HUE_BLUE
+        }
+    }
 
-        addMarker(MarkerOptions().position(LatLng(originLatitude, originLongitude)))
-        addMarker(MarkerOptions().position(LatLng(destinationLatitude, destinationLongitude)))
+    private fun defineTitle(
+        points: List<Point>,
+        coordinates: Point
+    ): String {
+        return when (points.indexOf(coordinates)) {
+            0 -> getString(R.string.map_origin)
+            else -> getString(R.string.map_destination)
+        }
     }
 
     private fun PolylineOptions.addRoutePoints(
@@ -119,7 +147,7 @@ class RouteDetailsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun createPolylineOption(): PolylineOptions = PolylineOptions()
-        .width(12f)
+        .width(resources.getDimension(R.dimen.half_measure))
         .color(context?.let { ContextCompat.getColor(it, R.color.colorAccent) } ?: CYAN)
         .geodesic(true)
 }
