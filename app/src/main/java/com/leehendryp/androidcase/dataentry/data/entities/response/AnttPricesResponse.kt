@@ -2,7 +2,7 @@ package com.leehendryp.androidcase.dataentry.data.entities.response
 
 import com.google.gson.annotations.SerializedName
 
-data class AnttPrices(
+data class AnttPricesResponse(
     @SerializedName("frigorificada") val frigorificada: Double?,
     @SerializedName("geral") val geral: Double?,
     @SerializedName("granel") val granel: Double?,

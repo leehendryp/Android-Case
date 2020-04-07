@@ -2,7 +2,7 @@ package com.leehendryp.androidcase.dataentry.data.entities.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RouteDetails(
+data class RouteDetailsResponse(
     @SerializedName("cached") val cached: Boolean? = false,
     @SerializedName("distance") val distance: Int?,
     @SerializedName("distance_unit") val distanceUnit: String?,
@@ -13,9 +13,9 @@ data class RouteDetails(
     @SerializedName("fuel_usage") val fuelUsage: Double?,
     @SerializedName("fuel_usage_unit") val fuelUsageUnit: String?,
     @SerializedName("has_tolls") val hasTolls: Boolean?,
-    @SerializedName("points") val points: List<Point>?,
+    @SerializedName("points") val points: List<PointResponse>?,
     @SerializedName("provider") val provider: String?,
-    @SerializedName("route") val route: List<List<ArrayList<Double>>>?,
+    @SerializedName("route") val route: List<List<List<Double>>>?,
     @SerializedName("toll_cost") val tollCost: Int?,
     @SerializedName("toll_cost_unit") val tollCostUnit: String?,
     @SerializedName("toll_count") val tollCount: Int?,

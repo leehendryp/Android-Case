@@ -1,16 +1,17 @@
 package com.leehendryp.androidcase.dataentry.domain
 
 import com.google.android.libraries.places.api.model.Place
-import com.leehendryp.androidcase.dataentry.data.entities.response.AnttPrices
-import com.leehendryp.androidcase.dataentry.data.entities.response.RouteDetails
+import com.leehendryp.androidcase.dataentry.data.entities.response.AnttPricesResponse
+import com.leehendryp.androidcase.dataentry.data.entities.response.PointResponse
+import com.leehendryp.androidcase.dataentry.data.entities.response.RouteDetailsResponse
 
-fun RouteDetails.mapIntoRouteWithAnttPrices(anttPrices: AnttPrices) =
+fun RouteDetailsResponse.toRouteWithAnttPrices(anttPrices: AnttPricesResponse) =
     RouteWithAnttPrices(
         distance = distance ?: 0,
         distanceUnit = distanceUnit ?: "",
         duration = duration ?: 0,
         durationUnit = durationUnit ?: "",
-        points = points ?: listOf(),
+        points = points?.toPointList() ?: listOf(),
         provider = provider ?: "",
         route = route ?: listOf(),
         tollCost = tollCost ?: 0,
@@ -29,7 +30,15 @@ fun RouteDetails.mapIntoRouteWithAnttPrices(anttPrices: AnttPrices) =
         perigosa = anttPrices.perigosa ?: 0.0
     )
 
-fun Place.mapIntoAddress() = Address(
+fun List<PointResponse>.toPointList(): List<Point> {
+    val list = mutableListOf<Point>()
+    forEach { response -> list.add(response.toPoint()) }
+    return list
+}
+
+fun PointResponse.toPoint() = Point(point = point ?: listOf())
+
+fun Place.toAddress() = Address(
     name = name ?: "",
     formattedAddress = address ?: "",
     location = Location(

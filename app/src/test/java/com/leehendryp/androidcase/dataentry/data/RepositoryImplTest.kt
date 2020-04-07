@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.leehendryp.androidcase.dataentry.core.MainCoroutineRule
 import com.leehendryp.androidcase.dataentry.data.local.LocalDataSource
 import com.leehendryp.androidcase.dataentry.data.remote.RemoteDataSource
-import com.leehendryp.androidcase.dataentry.domain.mapIntoRouteWithAnttPrices
+import com.leehendryp.androidcase.dataentry.domain.toRouteWithAnttPrices
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.coVerifyOrder
@@ -46,7 +46,7 @@ class RepositoryImplTest {
             val routeDetails = DTOs.routeDetails
             val infoForAntt = DTOs.infoForAntt
             val anttPrices = DTOs.anttPrices
-            val routeWithAnttPrices = routeDetails.mapIntoRouteWithAnttPrices(anttPrices)
+            val routeWithAnttPrices = routeDetails.toRouteWithAnttPrices(anttPrices)
 
             coEvery { remoteSource.getRouteDetailsFrom(infoProvidedByDriver) } returns routeDetails
             coEvery { remoteSource.getAnttPrices(infoForAntt) } returns anttPrices

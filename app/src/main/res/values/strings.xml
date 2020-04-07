@@ -14,4 +14,7 @@
     <string name="data_entry_avg_fuel_consumption">Average fuel consumption (km/L)</string>
     <string name="data_entry_fuel_price">Diesel price</string>
     <string name="data_entry_default_number_of_shafts_value">2</string>
+
+    <string name="map_origin">Origin</string>
+    <string name="map_destination">Destination</string>
 </resources>
